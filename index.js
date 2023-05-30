@@ -16,7 +16,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-  // do stuff here
+  let title = prompt("Enter a book title")
+  let author = prompt("Enter the author's name")
+  let pages = prompt("Enter the pages this book has")
+  let read = "not read";
+  let bookInput = new Book(title, author, pages, read);
+  myLibrary.push(bookInput);
 }
 
 
@@ -38,6 +43,7 @@ myLibrary.forEach(book => {
     row.appendChild(readCell);
     tableBody.appendChild(row);
 })
+
 
 // const theHobbit = new Book("The Hobbbit", "J.R.R Tolkien", "295 pages", "not read");
 // console.log(theHobbit.info());
