@@ -15,19 +15,41 @@ function Book(title, author, pages, read) {
   }
 }
 
+const bookForm = document.getElementById("bookForm");
+const formContainer = document.getElementById("formContainer");
+bookForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let titleInput = document.getElementById("titleInput").value;
+    let authorInput = document.getElementById("authorInput").value;
+    let pagesInput = document.getElementById("pagesInput").value;
+    let readInput = document.getElementById("readInput").value;
+
+    let bookInput = {
+        title: titleInput,
+        author: authorInput,
+        pages: pagesInput,
+        read: readInput
+    };
+
+    myLibrary.push(bookInput);
+    console.log(myLibrary);
+    updateLibrary();
+
+    bookForm.reset();
+    formContainer.style.display="none";
+})
+
 function addBookToLibrary() {
-  let title = prompt("Enter a book title")
-  let author = prompt("Enter the author's name")
-  let pages = prompt("Enter the pages this book has")
-  let read = "not read";
-  let bookInput = new Book(title, author, pages, read);
-  myLibrary.push(bookInput);
-  updateLibrary();
+    formContainer.style.display="block";
 }
 
 const tableBody = document.querySelector("#libraryTable")
 
 function updateLibrary() {
+    while (tableBody.rows.length > 1) {
+        tableBody.deleteRow(1);
+    }
     myLibrary.forEach(book => {
         const row = document.createElement("tr");
         const titleCell = document.createElement("td");
