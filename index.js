@@ -22,28 +22,31 @@ function addBookToLibrary() {
   let read = "not read";
   let bookInput = new Book(title, author, pages, read);
   myLibrary.push(bookInput);
+  updateLibrary();
 }
-
 
 const tableBody = document.querySelector("#libraryTable")
 
-myLibrary.forEach(book => {
-    const row = document.createElement("tr");
-    const titleCell = document.createElement("td");
-    const authorCell = document.createElement("td");
-    const pagesCell = document.createElement("td");
-    const readCell = document.createElement("td");
-    titleCell.textContent = book.title;
-    authorCell.textContent = book.author;
-    pagesCell.textContent = book.pages;
-    readCell.textContent = book.read;
-    row.appendChild(titleCell);
-    row.appendChild(authorCell);
-    row.appendChild(pagesCell);
-    row.appendChild(readCell);
-    tableBody.appendChild(row);
-})
+function updateLibrary() {
+    myLibrary.forEach(book => {
+        const row = document.createElement("tr");
+        const titleCell = document.createElement("td");
+        const authorCell = document.createElement("td");
+        const pagesCell = document.createElement("td");
+        const readCell = document.createElement("td");
+        titleCell.textContent = book.title;
+        authorCell.textContent = book.author;
+        pagesCell.textContent = book.pages;
+        readCell.textContent = book.read;
+        row.appendChild(titleCell);
+        row.appendChild(authorCell);
+        row.appendChild(pagesCell);
+        row.appendChild(readCell);
+        tableBody.appendChild(row);
+    })
+}
 
+updateLibrary();
 
 // const theHobbit = new Book("The Hobbbit", "J.R.R Tolkien", "295 pages", "not read");
 // console.log(theHobbit.info());
