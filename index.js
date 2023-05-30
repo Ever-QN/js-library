@@ -50,22 +50,35 @@ function updateLibrary() {
     while (tableBody.rows.length > 1) {
         tableBody.deleteRow(1);
     }
-    myLibrary.forEach(book => {
+    myLibrary.forEach(function(book, index) {
         const row = document.createElement("tr");
         const titleCell = document.createElement("td");
         const authorCell = document.createElement("td");
         const pagesCell = document.createElement("td");
         const readCell = document.createElement("td");
+        const removeCell = document.createElement("td");
+        const removeButton = document.createElement("button");
         titleCell.textContent = book.title;
         authorCell.textContent = book.author;
         pagesCell.textContent = book.pages;
         readCell.textContent = book.read;
+        removeButton.textContent = "Remove";
+        removeButton.setAttribute("data-index", index);
+        removeButton.addEventListener("click", removeBook);
+        removeCell.appendChild(removeButton);
         row.appendChild(titleCell);
         row.appendChild(authorCell);
         row.appendChild(pagesCell);
         row.appendChild(readCell);
+        row.appendChild(removeCell);
         tableBody.appendChild(row);
     })
+}
+
+function removeBook(event) {
+    let index = event.target.getAttribute("data-index");
+    myLibrary.splice(index, 1);
+    updateLibrary();
 }
 
 updateLibrary();
