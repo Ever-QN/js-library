@@ -58,6 +58,8 @@ function updateLibrary() {
         const readCell = document.createElement("td");
         const removeCell = document.createElement("td");
         const removeButton = document.createElement("button");
+        const toggleCell = document.createElement("td");
+        const toggleButton = document.createElement("button");
         titleCell.textContent = book.title;
         authorCell.textContent = book.author;
         pagesCell.textContent = book.pages;
@@ -66,11 +68,21 @@ function updateLibrary() {
         removeButton.setAttribute("data-index", index);
         removeButton.addEventListener("click", removeBook);
         removeCell.appendChild(removeButton);
+        toggleButton.textContent = book.read ? "read" : "not read";
+        book.toggleReadStatus = function () {
+            this.read = this.read === "not read" ? "read" : "not read";
+        }
+        toggleButton.addEventListener("click", function() {
+            book.toggleReadStatus();
+            updateLibrary();
+        })
+        toggleCell.appendChild(toggleButton);
         row.appendChild(titleCell);
         row.appendChild(authorCell);
         row.appendChild(pagesCell);
         row.appendChild(readCell);
         row.appendChild(removeCell);
+        row.appendChild(toggleCell);
         tableBody.appendChild(row);
     })
 }
